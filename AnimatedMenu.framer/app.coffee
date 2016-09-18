@@ -82,13 +82,13 @@ repositionMenus = () ->
 repositionMenus()
 
 cookieIcon = sketch.Cookie
-cookieIcon.superLayer = cookieMenu
+cookieIcon.parent = cookieMenu
 cookieIcon.center()
 
 cookieText = sketch.CookieText
-cookieText.superLayer = cookieMenu
+cookieText.parent = cookieMenu
 cookieText.centerX()
-cookieText.y = cookieText.superLayer.height * 0.8
+cookieText.y = cookieText.parent.height * 0.8
 
 cupcakeIcon = sketch.Cupcake
 cupcakeIcon.parent = cupcakeMenu
