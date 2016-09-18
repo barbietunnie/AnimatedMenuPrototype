@@ -29,90 +29,46 @@ container = new Layer
 menuHeight = container.height/4
 menuWidth = container.width
 
-cookieMenu = new Layer
-		height: menuHeight
-		width: menuWidth
-		x: 0
-		y: 0
-		backgroundColor: blue
-		shadowY: 2
-		shadowBlur: 40
-		shadowSpread: 3
-		shadowColor: "rgba(25, 25, 25, 0.3)"
+menuItems = []
+colors = [blue, green, yellow, red]
+icons = [sketch.Cookie, sketch.Cupcake, sketch.Raspberry, sketch.IceCream]
+titles = [sketch.CookieText, sketch.CupcakeText, sketch.FruitText, sketch.IceCreamText]
 
-cupcakeMenu = new Layer
-		height: menuHeight
-		width: menuWidth
-		x: 0
-		y: cookieMenu.y + cookieMenu.height
-		backgroundColor: green
-		shadowY: 2
-		shadowBlur: 40
-		shadowSpread: 3
-		shadowColor: "rgba(25, 25, 25, 0.3)"
+# Add the specified icon to the container
+addIcon = (index, iconParent) ->
+	icon = icons[index]
+	icon.parent = iconParent
+	icon.center()
+	icon.name = "icon"
 
-fruitMenu = new Layer
-		height: menuHeight
-		width: menuWidth
-		x: 0
-		y: cupcakeMenu.y + cupcakeMenu.height
-		backgroundColor: yellow
-		shadowY: 2
-		shadowBlur: 40
-		shadowSpread: 3
-		shadowColor: "rgba(25, 25, 25, 0.3)"
+# Add a title to the container
+addTitle = (index, titleParent) ->
+	title = titles[index]
+	title.parent = titleParent
+	title.centerX()
+	title.y = titleParent.height * 0.8
 
-iceCreamMenu = new Layer
-		height: menuHeight
-		width: menuWidth
-		x: 0
-		y: fruitMenu.y + fruitMenu.height
-		backgroundColor: red
-		shadowY: 2
-		shadowBlur: 40
-		shadowSpread: 3
-		shadowColor: "rgba(25, 25, 25, 0.3)"
+for menuColor, i in colors
+	menuItem = new Layer
+			height: menuHeight
+			width: menuWidth
+			x: 0
+			y: container.height /4 * i
+			shadowY: 2
+			shadowBlur: 40
+			shadowSpread: 3
+			shadowColor: "rgba(25, 25, 25, 0.3)"
+			parent: container
+			backgroundColor: menuColor
+			scale: 1.00
+	menuItems.push(menuItem)
+	addIcon(i, menuItem)
+	addTitle(i, menuItem)
 
 repositionMenus = () -> 
-		iceCreamMenu.bringToFront()
-		fruitMenu.bringToFront()
-		cupcakeMenu.bringToFront()
-		cookieMenu.bringToFront()
+		menuItems[3].bringToFront()
+		menuItems[2].bringToFront()
+		menuItems[1].bringToFront()
+		menuItems[0].bringToFront()
 
 repositionMenus()
-
-cookieIcon = sketch.Cookie
-cookieIcon.parent = cookieMenu
-cookieIcon.center()
-
-cookieText = sketch.CookieText
-cookieText.parent = cookieMenu
-cookieText.centerX()
-cookieText.y = cookieText.parent.height * 0.8
-
-cupcakeIcon = sketch.Cupcake
-cupcakeIcon.parent = cupcakeMenu
-cupcakeIcon.center()
-
-cupcakeText = sketch.CupcakeText
-cupcakeText.parent = cupcakeMenu
-cupcakeText.centerX()
-cupcakeText.y = cupcakeText.parent.height * 0.8
-
-fruitIcon = sketch.Raspberry
-fruitIcon.parent = fruitMenu
-fruitIcon.center()
-
-fruitText = sketch.FruitText
-fruitText.parent = fruitMenu
-fruitText.centerX()
-fruitText.y = fruitText.parent.height * 0.8
-
-iceCreamIcon = sketch.IceCream
-iceCreamIcon.parent = iceCreamMenu
-iceCreamIcon.center()
-
-iceCreamText = sketch.IceCreamText
-iceCreamText.parent = iceCreamMenu
-iceCreamText.centerX()
-iceCreamText.y = iceCreamText.parent.height * 0.8
